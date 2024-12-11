@@ -19,7 +19,7 @@ public class Libro {
     @Column(name = "autor", nullable = false, length = 100)
     private String autor;
 
-    @OneToMany(mappedBy = "isbn")
+    @OneToMany(mappedBy = "libroAsociado", fetch=FetchType.EAGER)
     private Set<Ejemplar> ejemplars = new LinkedHashSet<>();
 
     public Libro() {}

@@ -6,7 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 import java.util.List;
-
+//DAO genérico parametrizado para indicar el tipo de dato de el ID ya que dependiendo de la clase es String o Integer
 public class GenericDAO<T, ID> {
     private Class<T> entityClass;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("BiblioEjemplares");
@@ -16,6 +16,7 @@ public class GenericDAO<T, ID> {
         this.entityClass = entityClass;
 
     }
+    //Metodos para el CRUD Básico
     public T read(ID id) {
         return em.find(entityClass, id);
     }

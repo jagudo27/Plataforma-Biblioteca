@@ -34,7 +34,7 @@ public class Prestamo {
         this.usuario = usuario;
         this.ejemplar = ejemplar;
         this.fechaInicio = fechaInicio;
-        this.fechaDevolucion = fechaDevolucion;
+        setFechaDevolucion(fechaDevolucion);
     }
 
     public Prestamo() {
@@ -78,7 +78,20 @@ public class Prestamo {
     }
 
     public void setFechaDevolucion(LocalDate fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
+        if (fechaDevolucion == null){
+            this.fechaDevolucion = fechaInicio.plusDays(15);
+        }
+
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Prestamo{");
+        sb.append("usuario=").append(usuario.getNombre());
+        sb.append(", ejemplar=").append(ejemplar.getLibroAsociado().getTitulo());
+        sb.append(", fechaInicio=").append(fechaInicio.toString());
+        sb.append(", fechaDevolucion=").append(fechaDevolucion.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

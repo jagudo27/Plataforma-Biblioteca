@@ -10,13 +10,11 @@ import java.util.List;
 public class UsuarioService {
     private GenericDAO<Usuario, Integer> usuarioDAO = new GenericDAO<>(Usuario.class);
 
-    public void registrarUsuario(String dni, String nombre, String email, String password, String tipo) throws IllegalArgumentException {
+    public Usuario registrarUsuario(String dni, String nombre, String email, String password) throws IllegalArgumentException {
         if (!Validador.isFilled(dni, nombre, email, password)) {
             throw new IllegalArgumentException("Todos los campos son obligatorios para registrar un usuario.");
         }
-        if (!Validador.isFilled(tipo)){
-            tipo = "normal";
-        }
+        String tipo = "normal";
         Validador.isEmailValid(email);
         Validador.validarDocumentoIdentidad(dni);
         Validador.isTipoValid(tipo);
@@ -30,6 +28,7 @@ public class UsuarioService {
         usuario.setPenalizacionHasta(null);
 
         usuarioDAO.create(usuario);
+        return usuario;
     }
     public Usuario iniciarSesion(String email, String password) {
 
@@ -54,6 +53,7 @@ public class UsuarioService {
                 .findFirst()
                 .orElse(null);
     }
+
     public Usuario obtenerUsuarioPorEmail(String email) {
         return usuarioDAO.findAll().stream()
                 .filter(usuario -> usuario.getEmail().equals(email))
@@ -63,8 +63,8 @@ public class UsuarioService {
 
 
 
-    public void bloquearUsuario(String dni, int diasPenalizacion) {
-        Usuario usuario = obtenerUsuarioPorDNI(dni);
+    public void bloquearUsuario(Integer id, int diasPenalizacion) {
+        Usuario usuario = usuarioDAO.read(id);
         if (usuario == null) {
             throw new IllegalArgumentException("No se encontró el usuario con el DNI proporcionado.");
         }

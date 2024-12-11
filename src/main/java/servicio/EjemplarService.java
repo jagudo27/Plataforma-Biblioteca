@@ -12,7 +12,7 @@ public class EjemplarService {
     private GenericDAO<Ejemplar, Integer> ejemplarDAO;
     private LibroService libroService;
 
-    public EjemplarService(GenericDAO<Ejemplar, String> ejemplarDAO, LibroService libroService) {
+    public EjemplarService(LibroService libroService) {
         this.ejemplarDAO = new GenericDAO<>(Ejemplar.class);
         this.libroService = libroService;
     }

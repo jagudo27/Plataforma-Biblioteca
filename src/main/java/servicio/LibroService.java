@@ -19,6 +19,7 @@ public class LibroService {
         libroDAO.create(libro);
     }
 
+
     public Libro obtenerLibroPorISBN(String isbn) {
         return libroDAO.read(isbn);
     }
@@ -28,10 +29,10 @@ public class LibroService {
         // Obtener libro por ISBN13
         Libro libroRef = obtenerLibroPorISBN(isbn13);
 
-        // Contador para ejemplares disponibles
+        // Contador
         int stock = 0;
 
-        // Iterar sobre los ejemplares del libro y contar los disponibles
+        //Validar si los libros estan disponibles
         for (Ejemplar ejemplar : libroRef.getEjemplars()) {
             if (ejemplar.getEstado() != null && ejemplar.getEstado().equalsIgnoreCase("Disponible")) {
                 stock++;
