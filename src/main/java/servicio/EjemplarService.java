@@ -40,7 +40,7 @@ public class EjemplarService {
     public int getStockTotalEjemplares() {
         int stock = 0; // Contador para los ejemplares disponibles
         List<Ejemplar> ejemplares = ejemplarDAO.findAll();
-        // Iterar sobre la lista de ejemplares y contar los disponibles
+        // Itera sobre la lista de ejemplares y cuenta los disponibles
         for (Ejemplar ejemplar : ejemplares) {
             if (ejemplar.getEstado() != null && ejemplar.getEstado().equalsIgnoreCase("Disponible")) {
                 stock++;

@@ -253,7 +253,7 @@ public class Menu {
 
         System.out.print("Introduce el ID del ejemplar: ");
         int idEjemplar = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
+        sc.nextLine();
 
         try {
             prestamoService.registrarPrestamo(dniUsuario, idEjemplar);

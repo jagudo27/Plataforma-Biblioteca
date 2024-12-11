@@ -22,15 +22,16 @@ public class PrestamoService {
     }
 
     public void registrarPrestamo(String dniUsuario, int ejemplarId) throws IllegalArgumentException, Exception {
+        //Validamos para evitar campos vacíos
         if (!Validador.isFilled(dniUsuario, ejemplarId)) {
             throw new IllegalArgumentException("Todos los campos son obligatorios para registrar un préstamo.");
         }
-
+        //Obtenemos un Usuario con el DNI dado para añadirlo al prestamo
         Usuario usuario = usuarioService.obtenerUsuarioPorDNI(dniUsuario);
         if (usuario == null) {
             throw new IllegalArgumentException("No se encontró el usuario con el DNI " + dniUsuario);
         }
-
+        //Obtenemos un Ejemplar con para añadirlo al prestamo
         Ejemplar ejemplar = ejemplarService.obtenerEjemplarPorId(ejemplarId);
         if (ejemplar == null || !ejemplar.getEstado().equals("Disponible")) {
             throw new IllegalArgumentException("El ejemplar no está disponible o no existe.");
